@@ -1,0 +1,8 @@
+
+
+users = [["username":"admin","password":"admin123"],
+         ["username":"test","password":"test123"],
+         ["username":"jane","password":"jane123"],
+         ["username":"doe","password":"doe123"],
+         ["username":"foo","password":"foo123"],
+         ["username":"bar","password":"bar123"]]
