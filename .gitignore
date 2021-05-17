@@ -3,10 +3,14 @@
 venv
 
 # ignore caches
-__pycache__
+**/__pycache__
 
 #ignore default accounts text file
 default-accounts.txt
 
 #ignore the uploaded documents
-docs/**
+docs
+
+*.pyc
+/**/__pycache__
+/**/static/default-accounts.txt
