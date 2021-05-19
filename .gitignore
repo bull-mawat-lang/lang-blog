@@ -17,6 +17,7 @@ docs
 
 # ignore default profile images
 
+/**/static/profile_pics/*.
 /**/static/profile_pics/*.jpg
 /**/static/profile_pics/*.png
 /**/static/profile_pics/*.jpeg
