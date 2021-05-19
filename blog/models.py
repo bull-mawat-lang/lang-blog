@@ -53,7 +53,7 @@ class Upload(db.Model):
     title = db.Column(db.String(100), nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     name = db.Column(db.String(300), nullable=False)
-    data = db.Column(db.LargeBinary, nullable=False)
+    content = db.Column(db.LargeBinary, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 

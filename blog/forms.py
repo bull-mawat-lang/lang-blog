@@ -36,6 +36,27 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
+
+
+class RequestResetForm(FlaskForm):
+    email = StringField('Email',
+    validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is None:
+            raise ValidationError('There is no account with this email. Please register an account first.')
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password',
+    validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Reset Password')
+
+    
 class UpdateAccount(FlaskForm):
     username = StringField('Username',
     validators=[DataRequired(), Length(min=3, max=15)])
@@ -67,26 +88,9 @@ class PostForm(FlaskForm):
     submit = SubmitField('Post')
 
 
-class RequestResetForm(FlaskForm):
-    email = StringField('Email',
-    validators=[DataRequired(), Email()])
-    submit = SubmitField('Request Password Reset')
-
-
-    def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
-        if user is None:
-            raise ValidationError('There is no account with this email. Please register an account first.')
-
-
-class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password',
-    validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Reset Password')
-
 class UploadForm(FlaskForm):
-    data = FileField('Upload Document',
-    validators=[FileAllowed(['jpg', 'png', 'jpeg','pdf','doc','docx','odt','xls'])])
+    file_allowed = ['jpg', 'png', 'jpeg','pdf','doc','docx','odt','xls']
+    title = StringField('Title', validators=[DataRequired()])
+    content = FileField('Upload Document', validators=[DataRequired(), FileAllowed(file_allowed)])
 
     submit = SubmitField('Upload')

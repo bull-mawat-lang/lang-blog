@@ -60,6 +60,50 @@ def logout():
     return redirect(url_for("home"))
 
 
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request', sender='noreply@demail.com', recipients=[user.email])
+    msg.body = '''Visit the following link to reset your password:
+    {url_for('reset_token', token=token, _external=True)}
+    Ignore this message if you did not make this request
+    '''
+
+    mail.send(msg)
+
+
+@app.route("/reset_password", methods=["GET", "POST"])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form =RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('Email has been sent with instruction to reset your password', 'info')
+
+        return redirect(url_for('login'))
+
+    return render_template('reset_request.html', title='Reset Password', form=form)
+
+
+@app.route("/reset_password/<token>", methods=["GET", "POST"])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash('Invalid or expired token', 'warning')
+        return redirect(url_for('reset_request'))
+    form =ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        db.session.commit()
+        flash(f'Your was updated successfully!', 'success')
+        return redirect(url_for('login'))
+    return render_template('reset_token.html', title='Reset Password', form=form)
+
+
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
@@ -158,49 +202,6 @@ def user_posts(username):
     return render_template("user_posts.html", posts=posts, user=user)
 
 
-def send_reset_email(user):
-    token = user.get_reset_token()
-    msg = Message('Password Reset Request', sender='noreply@demail.com', recipients=[user.email])
-    msg.body = '''Visit the following link to reset your password:
-    {url_for('reset_token', token=token, _external=True)}
-    Ignore this message if you did not make this request
-    '''
-
-    mail.send(msg)
-
-
-@app.route("/reset_password", methods=["GET", "POST"])
-def reset_request():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    form =RequestResetForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        send_reset_email(user)
-        flash('Email has been sent with instruction to reset your password', 'info')
-
-        return redirect(url_for('login'))
-
-    return render_template('reset_request.html', title='Reset Password', form=form)
-
-
-@app.route("/reset_password/<token>", methods=["GET", "POST"])
-def reset_token(token):
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    user = User.verify_reset_token(token)
-    if user is None:
-        flash('Invalid or expired token', 'warning')
-        return redirect(url_for('reset_request'))
-    form =ResetPasswordForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user.password = hashed_password
-        db.session.commit()
-        flash(f'Your was updated successfully!', 'success')
-        return redirect(url_for('login'))
-    return render_template('reset_token.html', title='Reset Password', form=form)
-
 
 def save_doc(form_doc):
 
@@ -214,21 +215,25 @@ def save_doc(form_doc):
             flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
             return redirect(request.url)
 
-    random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_doc.filename)
-    doc_fn = random_hex + f_ext
-    doc_path = os.path.join(app.root_path, 'static/docs', doc_fn)
-    output_size = (125, 125)
-    f =file.open(form_doc)
-    f.thumbnail(output_size)
-    f.save(doc_path)
-    return doc_fn
+        random_hex = secrets.token_hex(8)
+        _, f_ext = os.path.splitext(form_doc.filename)
+        doc_fn = random_hex + f_ext
+        doc_path = os.path.join(app.root_path, 'static/docs', doc_fn)
+        output_size = (125, 125)
+        f =file.open(form_doc)
+        f.thumbnail(output_size)
+        f.save(doc_path)
+        return doc_fn
 
 @app.route("/upload/new", methods=["GET", "POST"])
 @login_required
 def new_upload():
     form = UploadForm()
     if form.validate_on_submit():
+        upload = Upload(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(upload)
+        db.session.commit()
+
         if request.method == 'POST':
             form_doc = request.files['name']
             if form_doc.filename == '':
@@ -253,3 +258,10 @@ def new_upload():
 def upload(upload_id):
     upload = Upload.query.get_or_404(upload_id)
     return render_template("upload.html", title=upload.title, name=upload.name.data, upload=upload)
+
+@app.route("/user/<string:username>")
+def user_uploads(username):
+    page = request.args.get('page', 1, type=int)
+    user =  User.query.filter_by(username=username).first_or_404()
+    uploads  = Upload.query.filter_by(author=user).order_by(Upload.date_posted.desc()).paginate(page=page, per_page=5)
+    return render_template("user_posts.html", uploads=uploads, user=user)
