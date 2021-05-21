@@ -5,22 +5,6 @@ venv
 # ignore caches
 **/__pycache__
 
-#ignore default accounts text file
-default-accounts.txt
-
-#ignore the uploaded documents
-docs
-
 *.pyc
 /**/__pycache__
 /**/static/default-accounts.txt
-
-# ignore default profile images
-
-/**/static/profile_pics/*.
-/**/static/profile_pics/*.jpg
-/**/static/profile_pics/*.png
-/**/static/profile_pics/*.jpeg
-/**/static/profile_pics/*.hvec
-/**/static/profile_pics/*.gif
-/**/static/profile_pics/*.ico
