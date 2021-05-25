@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from flask_login import current_user
 from blog.models import User
 
 
@@ -56,7 +56,7 @@ class ResetPasswordForm(FlaskForm):
     validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')
 
-    
+
 class UpdateAccount(FlaskForm):
     username = StringField('Username',
     validators=[DataRequired(), Length(min=3, max=15)])
@@ -80,17 +80,3 @@ class UpdateAccount(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('This email is exists in our database. Try different email.')
-
-
-class PostForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])
-    submit = SubmitField('Post')
-
-
-class UploadForm(FlaskForm):
-    file_allowed = ['jpg', 'png', 'jpeg','pdf','doc','docx','odt','xls']
-    title = StringField('Title', validators=[DataRequired()])
-    content = FileField('Upload Document', validators=[DataRequired(), FileAllowed(file_allowed)])
-
-    submit = SubmitField('Upload')

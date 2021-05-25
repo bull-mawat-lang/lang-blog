@@ -27,3 +27,6 @@ Type on command prompt "py -m venv <name-of-your-virtual-environment>"
 
 Step 4 (activate virtual environment)
 Type on command prompt ".\<name-of-your-virtual-environment>\Scripts\activate"
+
+
+createint database = from blog import db, create_app db.create_all(app=create_app())

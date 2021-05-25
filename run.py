@@ -1,4 +1,4 @@
-from blog import app
-# run with python blog.py
+from blog import create_app
+app = create_app()
 if __name__=="__main__":
     app.run(debug=True)

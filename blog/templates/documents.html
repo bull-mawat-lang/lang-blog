@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for upload in uploads.items %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + upload.author.image_file) }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="{{ url_for('uploads.user_uploads', username=upload.author.username) }}">{{ upload.author.username }}</a>
+              <small class="text-muted">{{ upload.date_posted.strftime('%Y-%m-%d') }}</small>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('uploads.upload', upload_id=upload.id) }}">{{ upload.title }}</a></h2>
+            <p class="article-content">{{ upload.data }}</p>
+          </div>
+        </article>
+    {% endfor %}
+    {% for page_num in uploads.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_num %}
+        {% if uploads.page == page_num %}
+          <a class="btn btn-info mb-4" href="{{ url_for('main.documents', page=page_num) }}">{{ page_num }}</a>
+        {% else %}
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('main.documents', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+    {% endfor %}
+{% endblock content %}

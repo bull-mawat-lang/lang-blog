@@ -1,6 +1,7 @@
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as serializer
-from blog import db, login_manager, app
+from flask import current_app
+from blog import db, login_manager
 from flask_login import UserMixin
 
 
@@ -35,7 +36,6 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
 
-
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
@@ -52,10 +52,18 @@ class Upload(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    name = db.Column(db.String(300), nullable=False)
-    content = db.Column(db.LargeBinary, nullable=False)
+    name = db.Column(db.String(300))
+    data = db.Column(db.LargeBinary)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
     def __repr__(self):
         return f"Upload('{self.title}', '{self.date_posted}')"
+
+
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+
+    def __repr__(self):
+        return '<Category %r>' % self.name

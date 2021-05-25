@@ -3,57 +3,58 @@
 
 {% block content%}
 
-<div class="content-section">
-  <form action="" method="POST" enctype="multipart/form-data">
-    {{ form.hidden_tag() }}
-    <fieldset class="form-group">
-      <legend class="border-bottom mb-4">{{ form.legend }}</legend>
-      <div class="form-group">
-        {{ form.title.label(class="form-control-label")}}
-        {% if form.title.errors %}
-          {{ form.title(class="form-control form-control-lg is-invalid") }}
-          <div class="invalid-feedback">
-            {% for error in form.title.errors %}
-              <span>{{ error}}</span>
-            {% endfor %}
-          </div>
-        {% else %}
-          {{ form.title(class="form-control form-control-lg") }}
-        {% endif %}
-      </div>
+<article class="media content-section">
+  <img src="{{ url_for('static', filename='profile_pics/' + upload.author.image_file)}}"
+  alt="" class="rounded-circle article-img">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a href="{{ url_for('user_uploads', username=upload.author.username) }}" class="mr-2">{{ upload.author.username }}</a>
+      <small class="text-muted">
+        {{ upload.date_posted.strftime('%Y-%m-%d') }}
+      </small>
 
-      <div class="form-group">
-        {{ form.submit(class="btn btn-outline-info") }}
-      </div>
+      {% if upload.author==current_user %}
+        <div>
 
-    </fieldset>
-  </form>
+          <a type="button" href="{{ url_for("update_upload", upload_id=upload.id) }}"
+          class="btn btn-secondary btn-sm mt-1 mb-1">Update</a>
+
+          <button class="btn btn-danger btn-sm m-1"
+          data-toggle="modal" data-target="#delete">
+            Delete
+          </button>
+
+        </div>
+      {% endif %}
+
+    </div>
+    <h2 class="article-title">{{ upload.title }}</h2>
+    <p class="article-content">{{ upload.data }}</p>
+  </div>
+</article>
+
+<div class="modal fade" id="delete" tabindex="-1"
+role="dialog" aria-labelledby="delete" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="delete">Delete File</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this file?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <form class="" action="{{ url_for('delete_document', upload_id=upload.id) }}" method="POST">
+          <input type="submit" class="btn btn-danger" value="Delete">
+
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
-{% endblock content %}
-
-
-<!doctype html>
-
-<h2>Select file to upload</h2>
-<p>
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<ul class=flashes>
-{% for message in messages %}
-<li>{{ message }}</li>
-{% endfor %}
-</ul>
-{% endif %}
-{% endwith %}
-</p>
-<form method="post" action="/" enctype="multipart/form-data">
-<dl>
-<p>
-<input type="file" name="file" autocomplete="off" required>
-</p>
-</dl>
-<p>
-<input type="submit" value="Submit">
-</p>
-</form>
+{% endblock content%}

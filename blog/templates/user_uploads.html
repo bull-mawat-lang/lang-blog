@@ -1,0 +1,42 @@
+
+{% extends "layout.html" %}
+
+{% block content%}
+
+  <h1 class="mb-3">Files Uploaded by {{ user.username }} ({{ uploads.total }})</h1>
+  {% for upload in uploads.items %}
+
+    <article class="media content-section">
+      <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file)}}"
+      alt="" class="rounded-circle article-img">
+      <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="{{ url_for('user_uploads', username=upload.author.username) }}" >{{ upload.author.username }}</a>
+          <small class="text-muted">{{ upload.date_posted.strftime('%Y-%m-%d') }}</small>
+        </div>
+        <h2><a href="{{ url_for('upload', upload_id=upload.id) }}" class="article-title">{{ upload.title }}</a></h2>
+        <p class="article-content">{{ upload.data }}</p>
+      </div>
+    </article>
+
+  {% endfor %}
+
+<!-- # pagination -->
+  {% for page_number in uploads.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+
+    {% if page_number %}
+      {% if uploads.page == page_number %}
+        <a class="btn btn-info mb-4" href="{{ url_for('user_uploads', username=user.username, page=page_number) }}">{{ page_number }}</a>
+      {% else %}
+        <a class="btn btn-outline-info mb-4" href="{{ url_for('user_uploads', username=user.username, page=page_number) }}">{{ page_number }}</a>
+      {% endif %}
+
+    {% else %}
+      ...
+    {% endif %}
+
+
+  {% endfor %}
+
+
+{% endblock content%}
