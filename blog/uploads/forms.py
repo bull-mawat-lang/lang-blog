@@ -8,5 +8,4 @@ class UploadForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     name = StringField('File Name')
     data = FileField('Upload', validators=[FileRequired(), FileAllowed(file_allowed)])
-
     submit = SubmitField('Upload')
