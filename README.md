@@ -33,10 +33,10 @@ from blog import db, create_app
 db.create_all(app=create_app())
 ```
 
-##Run the app from Terminal or CMD
+## Run the app from Terminal or CMD
 
-###Linux or Mac
+### Linux or Mac
 `python3 run.py`
 
-###Windows
+### Windows
 `py run.py`
