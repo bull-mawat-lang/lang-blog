@@ -30,7 +30,7 @@ Type `pip install -r requirements.txt`
 * Import db and create_app `from blog import db, create_app`
 * Create database and all tables `db.create_all(app=create_app())`
 
-* >Code is shown below
+>Code is shown below
 
 ```python
 from blog import db, create_app
