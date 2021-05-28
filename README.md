@@ -24,11 +24,11 @@ Go-to [https://docs.python.org/3/library/venv.html](https://docs.python.org/3/li
 Type `pip install -r requirements.txt`
 
 ## Create Database
-* *Start python script using
+* Start python script using
   * On Linux or Mac `python3`
   * On Windows `py`
-* *Import db and create_app `from blog import db, create_app`*
-* *Create database and all tables `db.create_all(app=create_app())`*
+* Import db and create_app `from blog import db, create_app`
+* Create database and all tables `db.create_all(app=create_app())`
 
 * >Code is shown below
 
