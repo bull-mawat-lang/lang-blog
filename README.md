@@ -52,10 +52,12 @@ db.create_all(app=create_app())
 
 ### Change these lines
 `SECRET_KEY = os.environ.get('SECRET_KEY')`
+
 `SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')`
 
 ### To
 `SECRET_KEY = "somerandomsecrets"`
+
 `SQLALCHEMY_DATABASE_URI = "sqlite:///mydatabase.db"`
 
 ## Or just configure them from environment variables
