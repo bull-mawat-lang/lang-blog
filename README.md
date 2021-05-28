@@ -1,23 +1,25 @@
 # To-dos
-## Create and activate the virtual environment
 
-### step 1 - Create Project Dir and Move to it
+### Create Project Dir and Move to it
 Open terminal or CLI and create or move to your project working directory
 
-### step 2 - Create Virtual Environment
-*For Linux or Mac* > python3 -m venv <name-of-your-virtual-environment>
-*For Windows* > py -m venv <name-of-your-virtual-environment>
+## Create and activate the virtual environment
 
-### Step 3 - Activate Virtual Environment
+### Step 1 - Create Virtual Environment
+*For Linux or Mac*> python3 -m venv **name-of-your-virtual-environment**
+*For Windows*> py -m venv **name-of-your-virtual-environment*
 
-*For Linux or Mac* > source <name-of-your-virtual-environment>"/bin/activate
-*For Windows* > .\<name-of-your-virtual-environment>\Scripts\activate
+### Step 2 - Activate Virtual Environment
 
-[Go-to](https://docs.python.org/3/library/venv.html) for more on virtual environment
+*For Linux or Mac*> source **name-of-your-virtual-environment**/bin/activate
+*For Windows*> .\**name-of-your-virtual-environment**\Scripts\activate
+
+[Go-to https://docs.python.org/3/library/venv.html](https://docs.python.org/3/library/venv.html) for more on virtual environment
 
 ## Clone the repo
-Use [ssh](git@github.com:bull-mawat-lang/lang-blog.git) OR
-Use [https](https https://github.com/bull-mawat-lang/lang-blog.git)
+Use [ssh git@github.com:bull-mawat-lang/lang-blog.git](git@github.com:bull-mawat-lang/lang-blog.git)
+OR
+Use [https https https://github.com/bull-mawat-lang/lang-blog.git](https https://github.com/bull-mawat-lang/lang-blog.git)
 
 ## Install Requirements
 Type > pip install -r requirements.txt
