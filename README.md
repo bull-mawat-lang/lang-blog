@@ -1,32 +1,35 @@
-For Linux debian
+#To-dos
 
-To create python virtual environment
+##-> Clone the repo
+Use ssh <git@github.com:bull-mawat-lang/lang-blog.git> OR
+Use https <https https://github.com/bull-mawat-lang/lang-blog.git>
 
-step 1
-Open terminal or CLI and move to your project working directory
+##-> Create and activate the virtual environment
 
-step 2
-Type "python3 -m <name-of-your-virtual-environment>"
-(You may need to install virtual environment tool using 'pip install virtualenv')
+###step 1 - Create Project Dir and Move to it
+Open terminal or CLI and create or move to your project working directory
 
-To activate the virtual environment in your project working directory
+###step 2 - Create Virtual Environment
+Type "python3 -m venv <name-of-your-virtual-environment>" For Linux or Mac
+Type "py -m venv <name-of-your-virtual-environment>" For Windows
 
-Type "source <name-of-your-virtual-environment"/bin/activate" on terminal or CLI
-Note - You must have virtualenv install on your system alread or use "python3 -m pip install virtualenv"
+###Step 3
+Activate Virtual Environment
 
-For windows
+Type "source <name-of-your-virtual-environment>"/bin/activate" For Linux or Mac
+Type ".\<name-of-your-virtual-environment>\Scripts\activate" For Windows
 
-step 1
-Open terminal or command prompt and move to your project working directory
+Go-to[Go-to] (https://docs.python.org/3/library/venv.html) for more on virtual environment
 
-step 2 (install virtual environment)
-Type on command prompt "py -m pip install virtualenv"
+##-> Install Requirements
+Type "pip install -r requirements.txt"
 
-step 3 (create virtual environment)
-Type on command prompt "py -m venv <name-of-your-virtual-environment>"
+##-> Create Database
+* *start python3 script*
+* *Import db, create_app*
+* *And run db.create_all(app=create_app())*
 
-Step 4 (activate virtual environment)
-Type on command prompt ".\<name-of-your-virtual-environment>\Scripts\activate"
-
-
-createint database = from blog import db, create_app db.create_all(app=create_app())
+'''python
+from blog import db, create_app
+db.create_all(app=create_app())
+'''
