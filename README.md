@@ -60,4 +60,4 @@ db.create_all(app=create_app())
 
 `SQLALCHEMY_DATABASE_URI = "sqlite:///mydatabase.db"`
 
-## Or just configure them from environment variables
+## Or just set them on environment variables
