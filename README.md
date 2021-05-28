@@ -3,37 +3,41 @@
 ## Create Project Dir and Move to it
 Open terminal or CLI and create or move to your project working directory
 
-## Create and activate the virtual environment
+## Create and Activate the Virtual Environment
 
 ### Step 1 - Create Virtual Environment
-*For Linux or Mac* - `python3 -m venv **name-of-your-virtual-environment**`
+*On Linux or Mac* `python3 -m venv <name-of-your-virtual-environment>`
 
-*For Windows* - `py -m venv **name-of-your-virtual-environment*`
+*On Windows* `py -m venv <name-of-your-virtual-environment>`
 
 ### Step 2 - Activate Virtual Environment
 
-*For Linux or Mac* - `source **name-of-your-virtual-environment**/bin/activate`
+*On Linux or Mac* `source <name-of-your-virtual-environment>/bin/activate`
 
-*For Windows* - `.\**name-of-your-virtual-environment**\Scripts\activate`
+*On Windows* `.\<name-of-your-virtual-environment>\Scripts\activate`
 
 Go-to [https://docs.python.org/3/library/venv.html](https://docs.python.org/3/library/venv.html) for more on virtual environment
 
-## Clone the repo
+## Clone the Repo
 
 ## Install Requirements
-Type - `pip install -r requirements.txt`
+Type `pip install -r requirements.txt`
 
 ## Create Database
-* *Start python script using `python3` for Linux/Mac or `py` for Windows*
-* *Import using `from blog import db, create_app`*
-* *And run `db.create_all(app=create_app())`*
+* *Start python script using
+  * On Linux or Mac `python3`
+  * On Windows `py`
+* *Import db and create_app `from blog import db, create_app`*
+* *Create database and all tables `db.create_all(app=create_app())`*
+
+* >Code is shown below
 
 ```python
 from blog import db, create_app
 db.create_all(app=create_app())
 ```
 
-## Run the app from Terminal or CMD
+## Run the App from Terminal or CMD
 
 ### Linux or Mac
 `python3 run.py`
