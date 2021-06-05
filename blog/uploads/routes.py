@@ -23,7 +23,7 @@ def new_upload():
             path = os.path.join(current_app.root_path, 'static/documents', file.filename)
             file.save(path)
             if form.validate_on_submit():
-                content=file.read()
+                content=file.read(10240)
                 upload = Upload(title=form.title.data, name=file.filename, data=content, author=current_user)
                 db.session.add(upload)
                 db.session.commit()
@@ -57,7 +57,7 @@ def update_upload(upload_id):
     file = request.files['data']
     if form.validate_on_submit():
         upload.title = form.title.data
-        upload.data = file.read()
+        upload.data = file.read(10240)
         upload.name = file.filename
         db.session.commit()
         flash("Your post has been updated", "success")
