@@ -11,9 +11,8 @@ h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
 
-.bg-steel {
-  background-color: #5F788A;
-  /*background-color: #428BCA;*/
+.site-header {
+  background-color: #81512A;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -25,12 +24,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-header .navbar-nav .nav-link:active {
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .content-section {
   background: #FFFFFF;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border: 1px solid #DDDDDD;
   border-radius: 3px;
   margin-bottom: 20px;
