@@ -66,9 +66,7 @@ db.create_all(app=create_app())
 >on Terminal
 
 `python`
-
 `import secrets`
-
 `secrets.token_hex(32)`
 
 
