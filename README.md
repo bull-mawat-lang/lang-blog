@@ -61,3 +61,11 @@ db.create_all(app=create_app())
 `SQLALCHEMY_DATABASE_URI = "sqlite:///yourdatabasename.db"`
 
 ## Or just set them on environment variables
+
+### Generating SECRET_KEY
+>on Terminal
+`python`
+`import secrets`
+`secrets.token_hex(32)`
+
+> Copy the output and paste it to your SECRET_KEY field
