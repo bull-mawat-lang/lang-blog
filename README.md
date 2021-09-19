@@ -72,4 +72,4 @@ db.create_all(app=create_app())
 `secrets.token_hex(32)`
 
 
-> Copy the output and paste it to your SECRET_KEY field
+> Copy the terminal output and paste it to your `SECRET_KEY` field
