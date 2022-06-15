@@ -82,32 +82,32 @@ db.create_all(app=create_app())
 
 ` ##### Landing page `
 
-![](https://github.com/bull-mawat-lang/lang-blog/tree/master/blog/static/app%20screenshots/home-1.png)
+![](https://github.com/bull-mawat-lang/lang-blog/blob/master/blog/static/app%20screenshots/home-1.png)
 
 
 ` ##### Login page `
 
-![](https://github.com/bull-mawat-lang/lang-blog/tree/master/blog/static/app%20screenshots/login-1.png)
+![](https://github.com/bull-mawat-lang/lang-blog/blob/master/blog/static/app%20screenshots/login-1.png)
 
 
 ` ##### Logged in page `
 
-![](https://github.com/bull-mawat-lang/lang-blog/tree/master/blog/static/app%20screenshots/Home-2.png)
+![](https://github.com/bull-mawat-lang/lang-blog/blob/master/blog/static/app%20screenshots/Home-2.png)
 
 ` ##### Create  new post page `
 
-![](https://github.com/bull-mawat-lang/lang-blog/tree/master/blog/static/app%20screenshots/post-1.png)
+![](https://github.com/bull-mawat-lang/lang-blog/blob/master/blog/static/app%20screenshots/post-1.png)
 
 ` ##### Current selected post page `
 
-![](https://github.com/bull-mawat-lang/lang-blog/tree/master/blog/static/app%20screenshots/post-2-updatedelete.png)
+![](https://github.com/bull-mawat-lang/lang-blog/blob/master/blog/static/app%20screenshots/post-2-updatedelete.png)
 
 
 ` ##### Delete post page `
 
-![](https://github.com/bull-mawat-lang/lang-blog/tree/master/blog/static/app%20screenshots/post-delete.png)
+![](https://github.com/bull-mawat-lang/lang-blog/blob/master/blog/static/app%20screenshots/post-delete.png)
 
 
 ` ##### Update post page `
 
-![](https://github.com/bull-mawat-lang/lang-blog/tree/master/blog/static/app%20screenshots/post-update.png)
+![](https://github.com/bull-mawat-lang/lang-blog/blob/master/blog/static/app%20screenshots/post-update.png)
