@@ -23,6 +23,9 @@ Go-to [https://docs.python.org/3/library/venv.html](https://docs.python.org/3/li
 ## Install Requirements
 Type `pip install -r requirements.txt`
 
+If you have outdated libraries, use `pip-upgrade` to upgrade your `requirements.txt` file
+You must install `pip-upgrade` to be able to use it. Go-to this link for more [https://github.com/simion/pip-upgrader](https://github.com/simion/pip-upgrader)
+
 ## Create Database
 * Start python script using
   * On Linux or Mac `python3`
@@ -73,3 +76,10 @@ db.create_all(app=create_app())
 
 
 > Copy the terminal output and paste it to your `SECRET_KEY` field
+
+
+### Screenshots
+
+` ##### Landing page `
+
+![]()
